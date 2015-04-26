@@ -103,7 +103,7 @@
 }
 %% Reset page counter for chapters, appendices and bibliography?
 \DeclareOption{resetpages}{
-  \AtEndOfClass{\counterwithin{page}{chapter}}
+  %\AtEndOfClass{\counterwithin{page}{chapter}}
   \setboolean{@wmResetPages}{true}
 }
 %% Fallback - Pass unkown options to the book class
@@ -136,7 +136,9 @@
 \RequirePackage{amsmath}
 
 %% To change counters I guess
-\RequirePackage{chngcntr}
+%% I no longer need this package, as it resets everything to zero.
+%% I preffer to do this manually in that case.
+%\RequirePackage{chngcntr}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Now for some fun commands
