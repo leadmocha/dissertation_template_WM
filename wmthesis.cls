@@ -103,10 +103,9 @@
 }
 %% Reset page counter for chapters, appendices and bibliography?
 \DeclareOption{resetpages}{
-  %\AtEndOfClass{\counterwithin{page}{chapter}}
   \setboolean{@wmResetPages}{true}
 }
-%% Fallback - Pass unkown options to the book class
+%% Fallback - Pass unknown options to the book class
 \DeclareOption*{
   \PassOptionsToClass{\CurrentOption}{book}%
 }
@@ -135,17 +134,13 @@
 %% We need math, of course ;)
 \RequirePackage{amsmath}
 
-%% To change counters I guess
-%% I no longer need this package, as it resets everything to zero.
-%% I preffer to do this manually in that case.
-%\RequirePackage{chngcntr}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Now for some fun commands
 
 %% Reset page counter if necessary
 \newcommand{\wmResetPages}{%
   \ifthenelse{\boolean{@wmResetPages}}{%
+    \@namedef{thepage}{\@nameuse{thechapter}.\arabic{page}}%
     \setcounter{page}{1}%
   }{}%
 }
@@ -180,9 +175,9 @@
 
 %% Prints the bibliography
 \newcommand{\wmBibliography}{%
-  %\ifthenelse{\boolean{@wmResetPages}}{%
-  %  \setcounter{chapter}{0}%
-  %}{}%
+  \ifthenelse{\boolean{@wmResetPages}}{%
+    \setcounter{chapter}{1}%
+  }{}%
   \wmResetPages%
   \renewcommand{\thechapter}{Bib}
   \printbibliography%
